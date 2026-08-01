@@ -4,18 +4,18 @@
 const WHATSAPP_PHONE = "919876543210";
 
 const STORIES_DATA = [
-    { id: "s1", title: "Member PR 180kg", tag: "HEAVY LIFT", category: "Strength", highlight: "Rohan hit 180kg raw deadlift on Baner floor!", details: "Shattered his personal best after 12 weeks of structured strength coaching under Sameer sir." },
-    { id: "s2", title: "10 AM Ladies Batch", tag: "LADIES BATCH", category: "Ladies Special", highlight: "High-energy Zumba & Core circuit at 10 AM", details: "Full house at 10 AM batch! Fun workouts, supportive female trainers, and high energy beats." },
-    { id: "s3", title: "Eucalyptus Steam", tag: "RECOVERY", category: "Facilities", highlight: "Post-leg day steam room relaxation in Sai Complex", details: "Hygienic eucalyptus-infused steam session in Sai Complex to accelerate muscle recovery." },
-    { id: "s4", title: "InBody Scan Result", tag: "RESULTS", category: "Assessment", highlight: "Lost 4.2% body fat in 30 days", details: "Ananya completed her 30-day re-assessment scan showing pure muscle gain and fat loss." },
-    { id: "s5", title: "Morning HIIT Circuit", tag: "6:30 AM", category: "Cardio", highlight: "Endurance & Agility kettlebell drills", details: "Sweat-inducing kettlebell and battlerope workout to kickstart your Baner workday." }
+    { id: "s1", title: "Member PR 180kg", tag: "HEAVY LIFT", category: "Strength", highlight: "Rohan hit 180kg raw deadlift on Baner floor!", details: "Shattered his personal best after 12 weeks of structured strength coaching under Sameer sir.", image: "images/story-heavy-lift.webp" },
+    { id: "s2", title: "10 AM Ladies Batch", tag: "LADIES BATCH", category: "Ladies Special", highlight: "High-energy Zumba & Core circuit at 10 AM", details: "Full house at 10 AM batch! Fun workouts, supportive female trainers, and high energy beats.", image: "images/story-ladies-batch.webp" },
+    { id: "s3", title: "Eucalyptus Steam", tag: "RECOVERY", category: "Facilities", highlight: "Post-leg day steam room relaxation in Sai Complex", details: "Hygienic eucalyptus-infused steam session in Sai Complex to accelerate muscle recovery.", image: "images/story-steam-recovery.webp" },
+    { id: "s4", title: "InBody Scan Result", tag: "RESULTS", category: "Assessment", highlight: "Lost 4.2% body fat in 30 days", details: "Ananya completed her 30-day re-assessment scan showing pure muscle gain and fat loss.", image: "images/story-inbody-scan.webp" },
+    { id: "s5", title: "Morning HIIT Circuit", tag: "6:30 AM", category: "Cardio", highlight: "Endurance & Agility kettlebell drills", details: "Sweat-inducing kettlebell and battlerope workout to kickstart your Baner workday.", image: "images/story-morning-hiit.webp" }
 ];
 
 const REVIEWS_DATA = [
-    { name: "Aditya Deshmukh", rating: 5, badge: "Google Verified", comment: "Best gym in Baner! Sameer sir's personal guidance and heavy weight floor are unmatched. Highly recommended." },
-    { name: "Pooja Kulkarni", rating: 5, badge: "Ladies Batch Member", comment: "The 10 AM ladies batch is super comfortable, clean and female-trainer lead. Lost 6kg in 2 months!" },
-    { name: "Rahul Verma", rating: 5, badge: "Transformation Member", comment: "State of the art machines, clean eucalyptus steam bath, and genuine trainers who don't force unnecessary supplements." },
-    { name: "Snehal Patil", rating: 5, badge: "Google Verified", comment: "Friendly atmosphere, great equipment in Sai Complex. Best value for money gym membership in Baner Pune." }
+    { name: "Aditya Deshmukh", rating: 5, badge: "Google Verified", comment: "Best gym in Baner! Sameer sir's personal guidance and heavy weight floor are unmatched. Highly recommended.", image: "images/reviewer-aditya.webp" },
+    { name: "Pooja Kulkarni", rating: 5, badge: "Ladies Batch Member", comment: "The 10 AM ladies batch is super comfortable, clean and female-trainer lead. Lost 6kg in 2 months!", image: "images/reviewer-pooja.webp" },
+    { name: "Rahul Verma", rating: 5, badge: "Transformation Member", comment: "State of the art machines, clean eucalyptus steam bath, and genuine trainers who don't force unnecessary supplements.", image: "images/reviewer-rahul.webp" },
+    { name: "Snehal Patil", rating: 5, badge: "Google Verified", comment: "Friendly atmosphere, great equipment in Sai Complex. Best value for money gym membership in Baner Pune.", image: "images/reviewer-snehal.webp" }
 ];
 
 const TIMETABLE_DATA = [
@@ -28,16 +28,16 @@ const TIMETABLE_DATA = [
 ];
 
 const TRAINERS_DATA = [
-    { name: "Sameer Coach", role: "Head Coach & Founder", exp: "12+ Yrs Exp", spec: "Bodybuilding, Heavy Compound Power Lifts, Transformation Specialist" },
-    { name: "Priya Trainer", role: "Ladies Fitness & Pilates Lead", exp: "7+ Yrs Exp", spec: "Female Body Toning, Posture Correction, Post-Pregnancy Fitness" },
-    { name: "Rahul Coach", role: "Powerlifting Coach", exp: "8+ Yrs Exp", spec: "Max Strength, Hypertrophy Splits, Athletic Conditioning" },
-    { name: "Sneha Specialist", role: "Zumba & Functional Instructor", exp: "5+ Yrs Exp", spec: "Calorie Shred HIIT, Tabata, Group Energy Workouts" }
+    { name: "Sameer Coach", role: "Head Coach & Founder", exp: "12+ Yrs Exp", spec: "Bodybuilding, Heavy Compound Power Lifts, Transformation Specialist", image: "images/trainer-sameer.webp" },
+    { name: "Priya Trainer", role: "Ladies Fitness & Pilates Lead", exp: "7+ Yrs Exp", spec: "Female Body Toning, Posture Correction, Post-Pregnancy Fitness", image: "images/trainer-priya.webp" },
+    { name: "Rahul Coach", role: "Powerlifting Coach", exp: "8+ Yrs Exp", spec: "Max Strength, Hypertrophy Splits, Athletic Conditioning", image: "images/trainer-rahul.webp" },
+    { name: "Sneha Specialist", role: "Zumba & Functional Instructor", exp: "5+ Yrs Exp", spec: "Calorie Shred HIIT, Tabata, Group Energy Workouts", image: "images/trainer-sneha.webp" }
 ];
 
 const TRANSFORMATIONS_DATA = [
-    { name: "Rohan M.", result: "Lost 14 kg Fat & Gained Muscle", time: "in 12 Weeks", desc: "Targeted weight training paired with a high-protein Indian diet chart." },
-    { name: "Ananya K.", result: "Body Recomp & Toned Glutes/Core", time: "in 8 Weeks", desc: "Attended the 10 AM Ladies Batch consistently with female coach guidance." },
-    { name: "Vikram S.", result: "Gained 6 kg Lean Muscle Mass", time: "in 16 Weeks", desc: "Heavy PPL split workout chart and clean surplus meal plan." }
+    { name: "Rohan M.", result: "Lost 14 kg Fat & Gained Muscle", time: "in 12 Weeks", desc: "Targeted weight training paired with a high-protein Indian diet chart.", image: "images/transformation-rohan.webp" },
+    { name: "Ananya K.", result: "Body Recomp & Toned Glutes/Core", time: "in 8 Weeks", desc: "Attended the 10 AM Ladies Batch consistently with female coach guidance.", image: "images/transformation-ananya.webp" },
+    { name: "Vikram S.", result: "Gained 6 kg Lean Muscle Mass", time: "in 16 Weeks", desc: "Heavy PPL split workout chart and clean surplus meal plan.", image: "images/transformation-vikram.webp" }
 ];
 
 const WORKOUT_SPLITS_DATA = [
@@ -47,10 +47,10 @@ const WORKOUT_SPLITS_DATA = [
 ];
 
 const AMENITIES_DATA = [
-    { title: "Heavy Hammer Strength Floor", badge: "4,000 SQ.FT", desc: "Olympic bench press stations, squat cages, dumbbells up to 50 kg, and rubberized anti-slip flooring." },
-    { title: "Exclusive Ladies Studio", badge: "10 AM - 12 PM", desc: "Private studio setup with female certified trainers for comfortable workouts." },
-    { title: "Eucalyptus Steam & Lockers", badge: "RECOVERY", desc: "Hot steam bath to relax muscles, hygienic private changing cubicles, and key-secured lockers." },
-    { title: "InBody Composition Analyzer", badge: "PRECISION", desc: "Medical-grade bio-impedance scanner tracking exact visceral fat and skeletal muscle mass." }
+    { title: "Heavy Hammer Strength Floor", badge: "4,000 SQ.FT", desc: "Olympic bench press stations, squat cages, dumbbells up to 50 kg, and rubberized anti-slip flooring.", image: "images/amenity-strength-floor.webp" },
+    { title: "Exclusive Ladies Studio", badge: "10 AM - 12 PM", desc: "Private studio setup with female certified trainers for comfortable workouts.", image: "images/amenity-ladies-studio.webp" },
+    { title: "Eucalyptus Steam & Lockers", badge: "RECOVERY", desc: "Hot steam bath to relax muscles, hygienic private changing cubicles, and key-secured lockers.", image: "images/amenity-steam-lockers.webp" },
+    { title: "InBody Composition Analyzer", badge: "PRECISION", desc: "Medical-grade bio-impedance scanner tracking exact visceral fat and skeletal muscle mass.", image: "images/amenity-inbody-scanner.webp" }
 ];
 
 const FAQS_DATA = [
@@ -97,8 +97,7 @@ function renderStories() {
     container.innerHTML = STORIES_DATA.map(story => `
         <div class="story-bubble" onclick="openStoryModal('${story.id}')">
             <div class="story-ring">
-                <div class="story-inner">
-                    <i class="fa-solid fa-dumbbell"></i>
+                <div class="story-inner" style="background-image: url('${story.image}');">
                     <span class="story-tag">${story.tag}</span>
                 </div>
             </div>
@@ -113,7 +112,10 @@ function renderReviews() {
     container.innerHTML = REVIEWS_DATA.map(rev => `
         <div class="review-card">
             <div class="rev-header">
-                <div class="rev-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <div class="rev-header-left">
+                    <img src="${rev.image}" alt="${rev.name}" class="rev-avatar">
+                    <div class="rev-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                </div>
                 <span class="rev-badge">${rev.badge}</span>
             </div>
             <p class="rev-comment">"${rev.comment}"</p>
@@ -158,6 +160,7 @@ function renderTrainers() {
     if (!container) return;
     container.innerHTML = TRAINERS_DATA.map(tr => `
         <div class="card-item">
+            <img src="${tr.image}" alt="${tr.name}" class="trainer-img">
             <h3 class="card-title">${tr.name}</h3>
             <div class="card-sub">${tr.role} • ${tr.exp}</div>
             <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Spec: ${tr.spec}</p>
@@ -173,6 +176,7 @@ function renderTransformations() {
     if (!container) return;
     container.innerHTML = TRANSFORMATIONS_DATA.map(tf => `
         <div class="card-item" style="border-color: var(--neon-green);">
+            <img src="${tf.image}" alt="${tf.name} transformation" class="transformation-img">
             <div class="card-sub">${tf.time}</div>
             <h3 class="card-title">${tf.name}</h3>
             <p style="font-size: 14px; color: var(--neon-green); font-weight: 800; margin-bottom: 8px;">${tf.result}</p>
@@ -210,6 +214,25 @@ function calculateMacros() {
     const bmi = (weight / (heightM * heightM)).toFixed(1);
 
     document.getElementById("bmiValue").innerText = bmi;
+
+    // Update BMI badge text/color based on calculated BMI (previously always showed "Normal / Fit")
+    const bmiBadge = document.getElementById("bmiBadge");
+    if (bmiBadge) {
+        const bmiNum = parseFloat(bmi);
+        bmiBadge.classList.remove("badge-warn", "badge-danger");
+        if (bmiNum < 18.5) {
+            bmiBadge.innerText = "Underweight";
+            bmiBadge.classList.add("badge-warn");
+        } else if (bmiNum < 25) {
+            bmiBadge.innerText = "Normal / Fit";
+        } else if (bmiNum < 30) {
+            bmiBadge.innerText = "Overweight";
+            bmiBadge.classList.add("badge-warn");
+        } else {
+            bmiBadge.innerText = "Obese";
+            bmiBadge.classList.add("badge-danger");
+        }
+    }
 
     let bmr = (10 * weight) + (6.25 * height) - (5 * age);
     bmr = selectedGender === "Male" ? bmr + 5 : bmr - 161;
@@ -379,6 +402,7 @@ function renderAmenities() {
     if (!container) return;
     container.innerHTML = AMENITIES_DATA.map(am => `
         <div class="card-item">
+            <img src="${am.image}" alt="${am.title}" class="amenity-img">
             <span class="res-badge" style="margin-bottom: 8px; display: inline-block;">${am.badge}</span>
             <h3 class="card-title">${am.title}</h3>
             <p style="font-size: 12px; color: var(--text-muted);">${am.desc}</p>
