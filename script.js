@@ -90,14 +90,18 @@ function scrollToSection(id) {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
-// RENDER FUNCTIONS
+// RENDER FUNCTIONS (UPDATED WITH PROPER <img> TAGS)
 function renderStories() {
     const container = document.getElementById("storiesRow");
     if (!container) return;
     container.innerHTML = STORIES_DATA.map(story => `
         <div class="story-bubble" onclick="openStoryModal('${story.id}')">
             <div class="story-ring">
-                <div class="story-inner" style="background-image: url('${story.image}');">
+                <div class="story-inner">
+                    <img src="${story.image}" 
+                         alt="${story.title}" 
+                         loading="lazy"
+                         onerror="this.src='https://placehold.co/64x64/121929/00FF66?text=PZ'; this.onerror=null;">
                     <span class="story-tag">${story.tag}</span>
                 </div>
             </div>
@@ -113,8 +117,15 @@ function renderReviews() {
         <div class="review-card">
             <div class="rev-header">
                 <div class="rev-header-left">
-                    <img src="${rev.image}" alt="${rev.name}" class="rev-avatar">
-                    <div class="rev-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <img src="${rev.image}" 
+                         alt="${rev.name}" 
+                         class="rev-avatar"
+                         loading="lazy"
+                         width="36" height="36"
+                         onerror="this.src='https://placehold.co/36x36/121929/00FF66?text=U'; this.onerror=null;">
+                    <div class="rev-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
                 </div>
                 <span class="rev-badge">${rev.badge}</span>
             </div>
@@ -128,7 +139,6 @@ function renderTimetable(filterTag) {
     const container = document.getElementById("timetableGrid");
     if (!container) return;
     
-    // Update active tab buttons
     document.querySelectorAll(".timetable-tabs .tab-btn").forEach(btn => {
         if (btn.innerText.includes(filterTag)) btn.classList.add("active");
         else btn.classList.remove("active");
@@ -160,7 +170,12 @@ function renderTrainers() {
     if (!container) return;
     container.innerHTML = TRAINERS_DATA.map(tr => `
         <div class="card-item">
-            <img src="${tr.image}" alt="${tr.name}" class="trainer-img">
+            <img src="${tr.image}" 
+                 alt="${tr.name} - ${tr.role}" 
+                 class="trainer-img"
+                 loading="lazy"
+                 width="400" height="200"
+                 onerror="this.src='https://placehold.co/400x200/121929/00FF66?text=Trainer'; this.onerror=null;">
             <h3 class="card-title">${tr.name}</h3>
             <div class="card-sub">${tr.role} • ${tr.exp}</div>
             <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Spec: ${tr.spec}</p>
@@ -176,7 +191,12 @@ function renderTransformations() {
     if (!container) return;
     container.innerHTML = TRANSFORMATIONS_DATA.map(tf => `
         <div class="card-item" style="border-color: var(--neon-green);">
-            <img src="${tf.image}" alt="${tf.name} transformation" class="transformation-img">
+            <img src="${tf.image}" 
+                 alt="${tf.name} transformation" 
+                 class="transformation-img"
+                 loading="lazy"
+                 width="400" height="180"
+                 onerror="this.src='https://placehold.co/400x180/121929/00FF66?text=Transformation'; this.onerror=null;">
             <div class="card-sub">${tf.time}</div>
             <h3 class="card-title">${tf.name}</h3>
             <p style="font-size: 14px; color: var(--neon-green); font-weight: 800; margin-bottom: 8px;">${tf.result}</p>
@@ -215,7 +235,6 @@ function calculateMacros() {
 
     document.getElementById("bmiValue").innerText = bmi;
 
-    // Update BMI badge text/color based on calculated BMI (previously always showed "Normal / Fit")
     const bmiBadge = document.getElementById("bmiBadge");
     if (bmiBadge) {
         const bmiNum = parseFloat(bmi);
@@ -264,10 +283,10 @@ function sendMacroPlanToWhatsApp() {
 - Gender: ${selectedGender} | Age: ${age}
 - Weight: ${weight}kg | Height: ${height}cm (BMI: ${bmi})
 - Target Goal: ${selectedGoal}
-- Daily Target: ${cal} (${prot} Protein)
+- Daily Target: \( {cal} ( \){prot} Protein)
 Please guide me with training and diet at PowerZone Baner!`;
 
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/\( {WHATSAPP_PHONE}?text= \){encodeURIComponent(text)}`, '_blank');
 }
 
 // MEMBERSHIP ESTIMATOR LOGIC
@@ -289,7 +308,7 @@ function renderCalculatorOptions() {
     const catGrid = document.getElementById("categoryGrid");
     if (catGrid) {
         catGrid.innerHTML = categories.map((c, idx) => `
-            <div class="select-card ${idx === 0 ? 'selected' : ''}" onclick="selectCategory('${c.name}', ${c.price}, this)">
+            <div class="select-card \( {idx === 0 ? 'selected' : ''}" onclick="selectCategory(' \){c.name}', ${c.price}, this)">
                 <strong style="font-size: 13px; display: block;">${c.name}</strong>
                 <span style="font-size: 12px; color: var(--neon-green);">₹${c.price}/mo</span>
             </div>
@@ -300,8 +319,8 @@ function renderCalculatorOptions() {
     const durGrid = document.getElementById("durationGrid");
     if (durGrid) {
         durGrid.innerHTML = durations.map((d, idx) => `
-            <div class="select-card ${idx === 0 ? 'selected' : ''}" onclick="selectDuration(${d}, this)">
-                <strong style="font-size: 13px; display: block;">${d} Month${d > 1 ? 's' : ''}</strong>
+            <div class="select-card \( {idx === 0 ? 'selected' : ''}" onclick="selectDuration( \){d}, this)">
+                <strong style="font-size: 13px; display: block;">\( {d} Month \){d > 1 ? 's' : ''}</strong>
                 <span style="font-size: 10px; color: var(--text-muted);">${d === 12 ? 'Best Value' : 'Standard'}</span>
             </div>
         `).join("");
@@ -356,7 +375,7 @@ function toggleAddon(name, price, el) {
 function updateFeeSummary() {
     let base = (selectedCategoryPrice + selectedAddonsTotal) * selectedDurationMonths;
     if (isAnnualBilling || selectedDurationMonths === 12) {
-        base = Math.round(base * 0.65); // 35% discount
+        base = Math.round(base * 0.65);
     }
 
     document.getElementById("summaryCategory").innerText = selectedCategoryName;
@@ -368,12 +387,12 @@ function updateFeeSummary() {
 function sendFeeEstimateWhatsApp() {
     const total = document.getElementById("summaryTotal").innerText;
     const text = `Hi Sameer Sir! I calculated my fee estimate on PowerZone App:
-- Plan: ${selectedCategoryName} (${selectedDurationMonths} Months)
+- Plan: \( {selectedCategoryName} ( \){selectedDurationMonths} Months)
 - Addons: ${selectedAddonNames.length > 0 ? selectedAddonNames.join(", ") : "None"}
 - Total Estimated Fee: ${total}
 Please confirm trial/booking at PowerZone Baner!`;
 
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/\( {WHATSAPP_PHONE}?text= \){encodeURIComponent(text)}`, '_blank');
 }
 
 // SPLITS & AMENITIES
@@ -388,7 +407,7 @@ function renderSplits() {
             </div>
             <div class="card-sub">${sp.goal} • Target: ${sp.focus}</div>
             <ul style="font-size: 12px; color: var(--text-muted); margin-left: 16px; margin-bottom: 14px;">
-                ${sp.exercises.map(ex => `<li>${ex}</li>`).join("")}
+                \( {sp.exercises.map(ex => `<li> \){ex}</li>`).join("")}
             </ul>
             <button class="btn-primary-neon" style="font-size: 11px; padding: 8px 16px;" onclick="openBookingModal('Printed Chart: ${sp.name}')">
                 Get Chart at Desk
@@ -402,7 +421,12 @@ function renderAmenities() {
     if (!container) return;
     container.innerHTML = AMENITIES_DATA.map(am => `
         <div class="card-item">
-            <img src="${am.image}" alt="${am.title}" class="amenity-img">
+            <img src="${am.image}" 
+                 alt="${am.title}" 
+                 class="amenity-img"
+                 loading="lazy"
+                 width="400" height="160"
+                 onerror="this.src='https://placehold.co/400x160/121929/00FF66?text=Amenity'; this.onerror=null;">
             <span class="res-badge" style="margin-bottom: 8px; display: inline-block;">${am.badge}</span>
             <h3 class="card-title">${am.title}</h3>
             <p style="font-size: 12px; color: var(--text-muted);">${am.desc}</p>
@@ -434,7 +458,7 @@ function toggleWhatsAppPopover() {
 
 function sendQuickWhatsApp(topic) {
     const text = `Hi Sameer Sir! I have an inquiry regarding: ${topic} at PowerZone Baner. Please guide me!`;
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/\( {WHATSAPP_PHONE}?text= \){encodeURIComponent(text)}`, '_blank');
 }
 
 function openBookingModal(title = '3-Day Free Trial Pass') {
@@ -461,7 +485,7 @@ function handleBookingSubmit(e) {
 Hi Sameer Sir, please activate my pass for PowerZone Baner!`;
 
     closeBookingModal();
-    window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/\( {WHATSAPP_PHONE}?text= \){encodeURIComponent(text)}`, '_blank');
 }
 
 function openStoryModal(storyId) {
