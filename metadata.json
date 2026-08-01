@@ -1,0 +1,6 @@
+{
+  "name": "PowerZone Fitness Studio",
+  "description": "Official mobile app for PowerZone Fitness Studio in Baner, Pune. Book free trials, estimate membership costs, explore programs, and connect via WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
