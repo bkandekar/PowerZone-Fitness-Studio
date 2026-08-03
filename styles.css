@@ -339,8 +339,6 @@ a {
 
 /* Google Reviews / Testimonials Section */
 .reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 
@@ -545,8 +543,6 @@ a {
 
 /* Programs Grid */
 .programs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 
@@ -639,8 +635,6 @@ a {
 
 /* Amenities / Facility Showcase */
 .amenities-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 
@@ -955,6 +949,89 @@ a {
   font-weight: 900;
   color: var(--primary);
   letter-spacing: 2px;
+}
+
+/* ==========================================================================
+   GENERIC SLIDER (used by Reviews, Programs, and Amenities sections)
+   ========================================================================== */
+.slider-wrap {
+  position: relative;
+}
+
+.slider-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slider-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.slider-track::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+
+.slider-track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.slider-track > * {
+  scroll-snap-align: start;
+  flex: 0 0 300px;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--primary);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: var(--transition);
+}
+
+.slider-btn:hover {
+  background: var(--primary);
+  color: #000;
+}
+
+.slider-btn-prev {
+  left: -8px;
+}
+
+.slider-btn-next {
+  right: -8px;
+}
+
+@media (max-width: 900px) {
+  .slider-btn {
+    display: none;
+  }
+
+  .slider-track > * {
+    flex: 0 0 82%;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-track > * {
+    flex: 0 0 90%;
+  }
 }
 
 /* Responsive Media Queries */
