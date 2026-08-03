@@ -239,7 +239,56 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  initSlider("reviewsTrack", "reviewsPrev", "reviewsNext");
-  initSlider("programsTrack", "programsPrev", "programsNext");
-  initSlider("amenitiesTrack", "amenitiesPrev", "amenitiesNext");
+  // Generic Slider Controls (used by Reviews, Programs, and Amenities sections)
+  function initSlider(trackId, prevBtnId, nextBtnId, autoPlay, intervalMs) {
+    const track = document.getElementById(trackId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    if (!track) return;
+
+    function getScrollStep() {
+      const firstCard = track.children[0];
+      if (!firstCard) return 300;
+      const trackStyle = window.getComputedStyle(track);
+      const gap = parseInt(trackStyle.columnGap || trackStyle.gap || "20", 10) || 20;
+      return firstCard.offsetWidth + gap;
+    }
+
+    function scrollNext() {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (track.scrollLeft >= maxScroll - 5) {
+        track.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        track.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+      }
+    }
+
+    function scrollPrev() {
+      track.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", scrollPrev);
+    if (nextBtn) nextBtn.addEventListener("click", scrollNext);
+
+    if (autoPlay) {
+      let timer = setInterval(scrollNext, intervalMs || 3000);
+
+      function pauseAutoPlay() {
+        clearInterval(timer);
+      }
+      function resumeAutoPlay() {
+        clearInterval(timer);
+        timer = setInterval(scrollNext, intervalMs || 3000);
+      }
+
+      track.addEventListener("mouseenter", pauseAutoPlay);
+      track.addEventListener("mouseleave", resumeAutoPlay);
+      track.addEventListener("touchstart", pauseAutoPlay, { passive: true });
+      track.addEventListener("touchend", resumeAutoPlay);
+    }
+  }
+
+  initSlider("reviewsTrack", "reviewsPrev", "reviewsNext", true, 3000);
+  initSlider("programsTrack", "programsPrev", "programsNext", true, 3500);
+  initSlider("amenitiesTrack", "amenitiesPrev", "amenitiesNext", true, 4000);
 });
