@@ -1,4 +1,4 @@
- /* ==========================================================================
+/* ==========================================================================
    POWERZONE FITNESS STUDIO - SEPARATE JAVASCRIPT (script.js)
    ========================================================================== */
 
@@ -111,6 +111,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // FAQ Accordion Toggle
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach(item => {
+    const question = item.querySelector(".faq-question");
+    question.addEventListener("click", () => {
+      const isOpen = item.classList.contains("open");
+      faqItems.forEach(i => i.classList.remove("open"));
+      if (!isOpen) {
+        item.classList.add("open");
+      }
+    });
+  });
 
   // Pricing Toggle Logic
   const pricingToggle = document.getElementById("pricingToggle");
@@ -128,26 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-.faq-icon::before {
-  content: '+';
-  font-size: 18px;
-  color: var(--primary);
-}
 
-.faq-item.open .faq-icon::before {
-  content: '−';
-}
-
-.faq-answer {
-  padding: 0 20px 20px 20px;
-  color: var(--text-muted);
-  font-size: 14px;
-  display: none;
-}
-
-.faq-item.open .faq-answer {
-  display: block;
-   }
   // Modal Handles
   const bookingModal = document.getElementById("bookingModal");
   const referralModal = document.getElementById("referralModal");
@@ -220,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Generic Slider Controls (used by Reviews, Programs, and Amenities sections)
-  function initSlider(trackId, prevBtnId, nextBtnId) {
+  function initSlider(trackId, prevBtnId, nextBtnId, autoPlay, intervalMs) {
     const track = document.getElementById(trackId);
     const prevBtn = document.getElementById(prevBtnId);
     const nextBtn = document.getElementById(nextBtnId);
@@ -234,33 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return firstCard.offsetWidth + gap;
     }
 
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        track.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        track.scrollBy({ left: getScrollStep(), behavior: "smooth" });
-      });
-    }
-  }
-
-// Generic Slider Controls (Reviews, Programs, Amenities) — Auto + Manual
-  function initSlider(trackId, prevBtnId, nextBtnId, autoPlay = false, intervalMs = 3000) {
-    const track = document.getElementById(trackId);
-    const prevBtn = document.getElementById(prevBtnId);
-    const nextBtn = document.getElementById(nextBtnId);
-    if (!track) return;
-
-    function getScrollStep() {
-      const firstCard = track.children[0];
-      if (!firstCard) return 300;
-      const style = window.getComputedStyle(track);
-      const gap = parseInt(style.columnGap || style.gap || "20", 10) || 20;
-      return firstCard.offsetWidth + gap;
-    }
-
     function scrollNext() {
       const maxScroll = track.scrollWidth - track.clientWidth;
       if (track.scrollLeft >= maxScroll - 5) {
@@ -271,33 +237,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function scrollPrev() {
-      if (track.scrollLeft <= 5) {
-        track.scrollTo({ left: track.scrollWidth, behavior: "smooth" });
-      } else {
-        track.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
-      }
+      track.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
     }
 
     if (prevBtn) prevBtn.addEventListener("click", scrollPrev);
     if (nextBtn) nextBtn.addEventListener("click", scrollNext);
 
     if (autoPlay) {
-      let timer = setInterval(scrollNext, intervalMs);
+      let timer = setInterval(scrollNext, intervalMs || 3000);
 
-      const pause = () => clearInterval(timer);
-      const resume = () => {
+      function pauseAutoPlay() {
         clearInterval(timer);
-        timer = setInterval(scrollNext, intervalMs);
-      };
+      }
+      function resumeAutoPlay() {
+        clearInterval(timer);
+        timer = setInterval(scrollNext, intervalMs || 3000);
+      }
 
-      track.addEventListener("mouseenter", pause);
-      track.addEventListener("mouseleave", resume);
-      track.addEventListener("touchstart", pause, { passive: true });
-      track.addEventListener("touchend", resume);
+      track.addEventListener("mouseenter", pauseAutoPlay);
+      track.addEventListener("mouseleave", resumeAutoPlay);
+      track.addEventListener("touchstart", pauseAutoPlay, { passive: true });
+      track.addEventListener("touchend", resumeAutoPlay);
     }
   }
 
-  // Auto-play चालू
   initSlider("reviewsTrack", "reviewsPrev", "reviewsNext", true, 3000);
   initSlider("programsTrack", "programsPrev", "programsNext", true, 3500);
   initSlider("amenitiesTrack", "amenitiesPrev", "amenitiesNext", true, 4000);
+});
