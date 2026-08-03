@@ -211,4 +211,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/918329931123?text=${encodedText}`, "_blank");
   }
+
+  // Generic Slider Controls (used by Reviews, Programs, and Amenities sections)
+  function initSlider(trackId, prevBtnId, nextBtnId) {
+    const track = document.getElementById(trackId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    if (!track) return;
+
+    function getScrollStep() {
+      const firstCard = track.children[0];
+      if (!firstCard) return 300;
+      const trackStyle = window.getComputedStyle(track);
+      const gap = parseInt(trackStyle.columnGap || trackStyle.gap || "20", 10) || 20;
+      return firstCard.offsetWidth + gap;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        track.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        track.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+      });
+    }
+  }
+
+  initSlider("reviewsTrack", "reviewsPrev", "reviewsNext");
+  initSlider("programsTrack", "programsPrev", "programsNext");
+  initSlider("amenitiesTrack", "amenitiesPrev", "amenitiesNext");
 });
