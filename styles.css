@@ -403,7 +403,7 @@ a {
 
 .trainer-img {
   width: 100%;
-  height: 220px;
+  height: 280px;
   object-fit: cover;
   border-radius: var(--radius-md);
   margin-bottom: 16px;
